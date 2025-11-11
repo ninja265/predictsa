@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.cdnfonts.com/css/fraktion-sans");
+
+:root {
+  --body-gradient: radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.2), transparent 55%),
+    radial-gradient(circle at 80% 0%, rgba(59, 130, 246, 0.15), transparent 45%),
+    linear-gradient(180deg, #f0fdf4 0%, #ffffff 60%);
+}
+
+:root[data-theme="night"] {
+  --body-gradient: linear-gradient(180deg, #05060a 0%, #0b0e12 45%, #000000 100%);
+}
+
+:root {
+  --color-canvas: 5 6 10;
+  --color-canvas-soft: 10 15 22;
+  --color-surface: 16 22 38;
+  --color-surface-muted: 21 28 47;
+  --color-border: 255 255 255;
+  --color-ink: 249 250 251;
+  --color-ink-muted: 182 193 214;
+  --color-frost: 255 255 255;
+  --color-night: 5 6 10;
+  --color-primary: 0 201 119;
+  --color-accent: 255 184 28;
+  --color-support: 255 77 77;
+  --bg-glow-1: rgba(0, 201, 119, 0.15);
+  --bg-glow-2: rgba(255, 184, 28, 0.15);
+  --bg-glow-3: rgba(15, 118, 255, 0.12);
+}
+
+:root[data-theme="day"] {
+  --color-canvas: 247 249 252;
+  --color-canvas-soft: 233 238 247;
+  --color-surface: 255 255 255;
+  --color-surface-muted: 236 241 250;
+  --color-border: 6 19 38;
+  --color-ink: 9 15 28;
+  --color-ink-muted: 82 96 122;
+  --color-frost: 9 15 28;
+  --color-night: 5 6 10;
+  --color-primary: 0 175 115;
+  --color-accent: 255 184 28;
+  --color-support: 225 60 60;
+  --bg-glow-1: rgba(0, 175, 124, 0.1);
+  --bg-glow-2: rgba(255, 184, 28, 0.12);
+  --bg-glow-3: rgba(32, 82, 168, 0.15);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-canvas text-slate font-sans antialiased relative text-[17px];
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+    min-height: 100vh;
+    background-image: var(--body-gradient);
+    background-color: rgb(var(--color-canvas));
+    transition: background-color 0.6s ease, color 0.6s ease;
+    isolation: isolate;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("/noise.png");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: -1;
+    mix-blend-mode: soft-light;
+  }
+
+  ::selection {
+    @apply bg-primary/40 text-night;
+  }
+}
+
+.font-fraktion {
+  font-family: "Fraktion Sans", var(--font-heading), sans-serif;
+}
+
+.glow-orb {
+  position: absolute;
+  inset: auto;
+  width: 400px;
+  height: 400px;
+  filter: blur(140px);
+  opacity: 0.45;
+  pointer-events: none;
+}
